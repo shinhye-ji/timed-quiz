@@ -1,24 +1,50 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.querySelectorAll(".choice-option"));
 
-let secondsLeft = 60;
+
+let secondsLeft = 120;
 const timeEl = document.querySelector(".timer");
 // Define your quiz questions and correct answers
 const quizQuestions = [
   {
-    question: "Who is the best person to ever exist?",
-    choices: ["audweeeeee", "guisep", "jasn", "jerm"],
-    correctAnswer: "audweeeeee"
+    question: "Which is the definition of gyat?",
+    choices: ["a gun", "a grape", "a video game", "a big booty"],
+    correctAnswer: "a big booty"
   },
   {
-    question: "What is the capital of Texas?",
-    choices: ["choice A", "Choice B", "Choice C", "Choice D"],
-    correctAnswer: "Choice B"
+    question: 'Choose the correct reponse to "wus good gang"',
+    choices: ["yuh", "wus good bro", "suhhh dude", "All of the above"],
+    correctAnswer: "All of the above"
   },
   {
-    question: "What is the capital of Norway?",
-    choices: ["choice A", "Choice B", "Choice C", "Choice D"],
-    correctAnswer: "Choice B"
+    question: 'Another word for "hella"',
+    choices: ["highkey", "bussin", "sus", "OT"],
+    correctAnswer: "highkey"
+  },
+  {
+    question: "Alfredo is looking hella fly in his brand new J's. How's ma boy lookin and feelin?",
+    choices: ["weak as hell", "iced out", "dripped out", "snatched"],
+    correctAnswer: "dripped out"
+  },
+  {
+    question: "Scenario: Your homie just lied to you. He even said 'no cap'. What does that even mean?",
+    choices: ["I don't have a hat...", "The lid fell off my soda-pop and I'm 90 years old.", "oreo is nasty, god >:(", "I'm definitely not lying!!!"],
+    correctAnswer: "I'm definitely not lying!!!"
+  },
+  {
+    question: "Fill in the blank: OMG Stargrasslemonzest! Your waist is _____, no cap!!",
+    choices: ["lowkey", "sis", "snatched", "bussin"],
+    correctAnswer: "snatched"
+  },
+  {
+    question: "bbg (babygirl) just hit the griddy in an HEB. How would you respond to this?",
+    choices: ["slay", "goat", "simp", "why would you hit that, rebecca???"],
+    correctAnswer: "slay"
+  },
+  {
+    question: "How do you think you did?",
+    choices: ["GOATED", "OT", "I ATE", "All of the Above"],
+    correctAnswer: "All of the Above"
   }
   // Add more questions as needed
 ];
@@ -43,8 +69,11 @@ function checkAnswer(selectedChoice) {
   const currentQuestion = quizQuestions[currentQuestionIndex];
   const userAnswer = currentQuestion.choices.indexOf(selectedChoice);
 
+  localStorage.setItem(`userAnswer_${currentQuestionIndex}`, currentQuestion.choices[userAnswer]);
+
 console.log(currentQuestion.choices[userAnswer]);
 console.log(currentQuestion.correctAnswer);
+
   if (currentQuestion.choices[userAnswer] === currentQuestion.correctAnswer) {
     // Handle correct answer
     alert("Correct! Well done.");
@@ -56,16 +85,35 @@ console.log(currentQuestion.correctAnswer);
 
   // Move to the next question
   currentQuestionIndex++;
+
 console.log(currentQuestionIndex);
 console.log(quizQuestions.length);
+
   // Check if there are more questions
   if (currentQuestionIndex < quizQuestions.length) {
     displayQuestion();
   } else {
     // Quiz completed
-    let score = secondsLeft
-    let initials = prompt("Quiz is complete. Type in initials to save high score.");
-    localStorage.setItem("userScore", initials + ":" + score)
+    let correctAnswers = 0;
+
+    for (let i = 0; i < quizQuestions.length; i++) {
+      const storedAnswer =localStorage.getItem(`userAnswer_${i}`);
+      if (storedAnswer && storedAnswer === quizQuestions[i].correctAnswer) {
+        correctAnswers++;
+      }
+    }
+    //score out of 8
+    let scoreFraction = `${correctAnswers}/${quizQuestions.length}`;
+
+    alert(`You made it. Your score is ${scoreFraction}. Good job.`);
+
+    let initials = prompt("Type in Initials to save your score.");
+
+    localStorage.setItem("userScore", JSON.stringify({initials, scoreFraction}));
+
+    
+    window.location.href="highscores.html";
+    console.log("Redirecting to highscores.html...");
   }
 }
 

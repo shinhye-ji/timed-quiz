@@ -19,18 +19,19 @@ h4 {
 }
 
 h1 {
-    font-size: 5.4rem;
-    color:#ffb7c5 ;
-    margin-bottom: 5rem;
+    font-size: 2.5rem;
+    color:#ffb7c5;
+    margin-bottom: 4rem;
+    text-align: center;
 }
 
 h1 > span {
-    font-size: 2.4rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 h2 {
-    font-size: 4.2rem;
+    font-size: 3.2rem;
     margin-bottom: 4rem;
     font-weight: 700;
 }
@@ -40,6 +41,16 @@ h3 {
     font-weight: 500;
 }
 
+h4 {
+    font-size: 1.8rem;
+}
+
+#initialsOutput,
+#scoreOutput {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
 /* UTILITIES */
 
 .container {
@@ -54,6 +65,21 @@ h3 {
 
 .container > * {
     width: 100%;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #eceff1;
+    border-radius: 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
+      rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+    margin: 2%;
+    margin-top: 80px;
+    padding: 20px;
+    width: 46%;
+    overflow: hidden;
+    position: relative;
+    float: left;
 }
 
 .flex-column {
