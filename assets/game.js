@@ -1,5 +1,5 @@
 const question = document.getElementById("question");
-const choices = Array.from(document.querySelectorAll(".choice-option"));
+const choices = Array.from(document.querySelectorAll(".choice-container"));
 
 
 let secondsLeft = 120;
@@ -60,7 +60,7 @@ function displayQuestion() {
     // choice.textContent = ${string.fromCharCode(65 + index)}. ${currentQuestion.choices[index]};
     console.log(choice, index);
     console.log(currentQuestion.choices[index]);
-    choice.textContent = currentQuestion.choices[index];
+    choice.children[1].textContent = currentQuestion.choices[index];
   });
 }
 
@@ -135,7 +135,7 @@ function setTime() {
 
 // Add click event listeners to choices
 choices.forEach(choice => {
-  choice.addEventListener("click", () => checkAnswer(choice.textContent));
+  choice.addEventListener("click", () => checkAnswer(choice.children[1].textContent));
 });
 
 // Display the first question
